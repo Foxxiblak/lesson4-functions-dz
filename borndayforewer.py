@@ -5,14 +5,28 @@
 Можно использовать свой вариант программы из предыдущего дз, мой вариант реализован ниже
 Задание: переписать код используя как минимум 1 функцию
 """
+year_ask = 'Ввведите год рождения А.С.Пушкина: '
+day_ask = 'Ввведите день рождения Пушкина: '
+success = 'Верно'
+fail = 'Не верно'
+def print_ask(ask):
+    return input(ask)
 
-year = input('Ввведите год рождения А.С.Пушкина:')
-while year != '1799':
-    print("Не верно")
-    year = input('Ввведите год рождения А.С.Пушкина:')
+def print_res(text):
+    print(text)
 
-day = input('Ввведите день рождения Пушкин?')
-while day != '6':
-    print("Не верно")
-    day = input('В какой день июня родился Пушкин?')
-print('Верно')
+def ask_year():
+    year = print_ask(year_ask)
+    while year != '1799':
+        print_res(fail)
+        year = print_ask(year_ask)
+
+def ask_day():
+    day = print_ask(day_ask)
+    while day != '6':
+        print_res(fail)
+        day = print_ask(day_ask)
+
+ask_year()
+ask_day()
+print_res(success)

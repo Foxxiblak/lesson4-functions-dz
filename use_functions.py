@@ -34,20 +34,60 @@
 Для реализации основного меню можно использовать пример ниже или написать свой
 """
 
-while True:
+def add_money():
+    num = input('Введите сумму для добавления на счет: ')
+    if num.isdigit():
+        return float(num)
+    else:
+        print('Это не число. Введите число.')
+        return 0.0
+
+def purchase(bank_account):
+    num = input('Введите сумму покупки: ')
+    if num.isdigit():
+        if float(num) > bank_account:
+            print('\n!!! Недостаточно средств на счёте !!!\n')
+            return False
+        else:
+            name = input('Введите название товара: ')
+            return [float(num), name]
+    else:
+        print('Это не число. Введите число.')
+        return False
+
+def print_history(history):
+    print('*-' * 30)
+    if len(history) == 0:
+        print('Пока покупок нет.')
+    else:
+        for key, value in history:
+            print(f'Вы купили {value}: {key}')
+    print('*-' * 30)
+
+bank_account = 0.0
+history = []
+exit = False
+
+while exit == False:
     print('1. пополнение счета')
     print('2. покупка')
     print('3. история покупок')
     print('4. выход')
+    print(f'Состояние счета: {bank_account}')
 
-    choice = input('Выберите пункт меню')
+    choice = input('Выберите пункт меню: ')
     if choice == '1':
-        pass
+        bank_account += add_money()
     elif choice == '2':
-        pass
+        res = purchase(bank_account)
+        if res != False:
+            bank_account -= res[0]
+            history.append({res[1], res[0]})
     elif choice == '3':
+        print_history(history)
         pass
     elif choice == '4':
+        exit = True
         break
     else:
         print('Неверный пункт меню')
